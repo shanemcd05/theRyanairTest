@@ -3,22 +3,27 @@ package com.smcdonnell.ryanairtask;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import cucumber.api.java.en.Given;
+
 import org.junit.Assert;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import cucumber.api.java.en.Given;
 
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
  * Created by ShaneMcD on 01/06/2015.
  */
 public class mainTest {
-    private WebDriver driver = new FirefoxDriver();
+
+    WebDriver driver= new FirefoxDriver();
 
 
     @Given("I am on the Ryanair Search page")
@@ -30,23 +35,27 @@ public class mainTest {
 
     }
 
-    @When("I search for flights")
-    public void search_for() throws Throwable {
+   // @When("I search for flights")
+   @When("^I search for flight \"(.*?)\" to \"(.*?)\"$")
+    public void searchForFlight(String origin, String destination) throws Throwable {
 
-        WebElement origin = driver.findElement(By.name("SearchInput$Orig"));
-        assertTrue(origin.getText().startsWith("Origin"));
+        WebElement flightOrigin = driver.findElement(By.name("SearchInput$Orig"));
+        assertTrue(flightOrigin.getText().startsWith("Origin"));
 
 
         WebElement dropDownOriginSelect = driver.findElement(By.name("SearchInput$Orig"));
-        WebElement dropDownOriginOption = dropDownOriginSelect.findElement(
-                By.xpath("//.[@name='SearchInput$Orig']//*[contains(text(),'Dublin T1 (DUB)')]"));
-        dropDownOriginOption.click();
+        if (origin.equals("DUB")) {
+            WebElement dropDownOriginOption = dropDownOriginSelect.findElement(
+                    By.xpath("//.[@name='SearchInput$Orig']//*[contains(text(),'Dublin T1 (DUB)')]"));
+            dropDownOriginOption.click();
+        }
 
-        WebElement dropDownDestinationSelect = driver.findElement(By.name("SearchInput$Dest"));
-        WebElement dropDownDestinationOption = dropDownDestinationSelect.findElement(
-                By.xpath("//.[@name='SearchInput$Dest']//*[contains(text(),'London (Stansted) (STN)')]"));
-        dropDownDestinationOption.click();
-
+        if (destination.equals("STN")) {
+            WebElement dropDownDestinationSelect = driver.findElement(By.name("SearchInput$Dest"));
+            WebElement dropDownDestinationOption = dropDownDestinationSelect.findElement(
+                    By.xpath("//.[@name='SearchInput$Dest']//*[contains(text(),'London (Stansted) (STN)')]"));
+            dropDownDestinationOption.click();
+        }
         WebElement departDateSelect = driver.findElement(By.name("SearchInput$DeptDate"));
         departDateSelect.click();
         String myDepartDateString = "30/06/2015";
@@ -68,6 +77,7 @@ public class mainTest {
         WebElement searchButton = driver.findElement(
                 By.name("SearchInput$ButtonSubmit"));
         searchButton.click();
+
 
     }
 
@@ -162,12 +172,16 @@ public class mainTest {
 
     }
 
-    @Then("I close browser session")
-    public void browserClose() throws Throwable {
+    @Then("I verify the seat were selected")
+    public void verifyAndBrowserClose() throws Throwable {
 
-        driver.quit();  //Closes all browser windows
+        WebElement seats = driver.findElement(
+                By.xpath(".//*[@id='seats']/div/div[5]/table/tbody/tr[2]/td[1]/input"));
 
+        assertTrue(seats.isDisplayed());
 
+        //closing browser
+        driver.quit();
     }
 
 }
