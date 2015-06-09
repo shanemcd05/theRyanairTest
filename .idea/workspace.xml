@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="42090763-75ef-4668-a4a5-2d6e03127557" name="Default" comment="retry push after updating global settings">
-      <change type="DELETED" beforePath="C:\Users\ShaneMcD\IdeaProjects\theRyanairTest\src\test\java\com\smcdonnell\ryanairtask\autoObjects.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ShaneMcD\IdeaProjects\theRyanairTest\target\test-classes\com\smcdonnell\ryanairtask\autoObjects.class" afterPath="" />
+    <list default="true" id="42090763-75ef-4668-a4a5-2d6e03127557" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/com/smcdonnell/ryanairtask/mainTest.class" afterPath="$PROJECT_DIR$/target/test-classes/com/smcdonnell/ryanairtask/mainTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/smcdonnell/ryanairtask/flight.feature" afterPath="$PROJECT_DIR$/src/test/java/com/smcdonnell/ryanairtask/flight.feature" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/smcdonnell/ryanairtask/mainTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/smcdonnell/ryanairtask/mainTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/cucumber/report.js" afterPath="$PROJECT_DIR$/target/cucumber/report.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -124,8 +120,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="67" />
-    <option name="y" value="11" />
+    <option name="x" value="-51" />
+    <option name="y" value="25" />
     <option name="width" value="1684" />
     <option name="height" value="1026" />
   </component>
@@ -830,10 +826,17 @@
       <option name="number" value="Default" />
       <updated>1433191609576</updated>
     </task>
+    <task id="LOCAL-00001" summary="added example table">
+      <created>1433884506467</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1433884506467</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="11" width="1684" height="1026" extended-state="0" />
+    <frame x="-51" y="25" width="1684" height="1026" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -874,7 +877,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="retry push after updating global settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="retry push after updating global settings" />
+    <MESSAGE value="added example table" />
+    <option name="LAST_COMMIT_MESSAGE" value="added example table" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
