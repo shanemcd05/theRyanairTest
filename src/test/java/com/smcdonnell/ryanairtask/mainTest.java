@@ -1,21 +1,18 @@
 package com.smcdonnell.ryanairtask;
 
-import cucumber.api.PendingException;
+import com.smcdonnell.ryanairtask.resources.pageObjects;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import cucumber.api.java.en.Given;
-
 import org.junit.Assert;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-
-import static org.junit.Assert.assertEquals;
+import org.openqa.selenium.support.PageFactory;
+import static com.smcdonnell.ryanairtask.resources.pageObjects.*;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -32,6 +29,7 @@ public class mainTest {
         driver.navigate().to("https://www.bookryanair.com/SkySales/Booking.aspx?#Search");
         Assert.assertTrue("Title should start with Search",
                 driver.getTitle().startsWith("Search"));
+        PageFactory.initElements(driver, pageObjects.class);
 
     }
 
@@ -39,45 +37,37 @@ public class mainTest {
    @When("^I search for flight \"(.*?)\" to \"(.*?)\"$")
     public void searchForFlight(String origin, String destination) throws Throwable {
 
-        WebElement flightOrigin = driver.findElement(By.name("SearchInput$Orig"));
-        assertTrue(flightOrigin.getText().startsWith("Origin"));
-
+       //Check for correct location
+        assertTrue(flightOrigin(driver).getText().startsWith("Origin"));
 
         WebElement dropDownOriginSelect = driver.findElement(By.name("SearchInput$Orig"));
         if (origin.equals("DUB")) {
-            WebElement dropDownOriginOption = dropDownOriginSelect.findElement(
-                    By.xpath("//.[@name='SearchInput$Orig']//*[contains(text(),'Dublin T1 (DUB)')]"));
-            dropDownOriginOption.click();
+            //dropDownOriginOption pageObject points to Dublin T1
+            dropDownOriginOption(driver).click();
         }
 
         if (destination.equals("STN")) {
             WebElement dropDownDestinationSelect = driver.findElement(By.name("SearchInput$Dest"));
-            WebElement dropDownDestinationOption = dropDownDestinationSelect.findElement(
-                    By.xpath("//.[@name='SearchInput$Dest']//*[contains(text(),'London (Stansted) (STN)')]"));
-            dropDownDestinationOption.click();
+            //dropDownOriginOption pageObject points to London Stansted
+            dropDownDestinationOption(driver).click();
         }
-        WebElement departDateSelect = driver.findElement(By.name("SearchInput$DeptDate"));
-        departDateSelect.click();
-        String myDepartDateString = "30/06/2015";
-        departDateSelect.clear();
-        departDateSelect.sendKeys(myDepartDateString);
+       //  departDateSelect pointing to SearchInput$DeptDate
+        departDateSelect(driver).click();
+        departDateSelect(driver).clear();
+        departDateSelect(driver).sendKeys("30/07/2015");
 
 
-        WebElement returnDateSelect = driver.findElement(By.name("SearchInput$RetDate"));
-        returnDateSelect.click();
-        String myReturnDateString = "01/07/2015";
-        returnDateSelect.clear();
-        returnDateSelect.sendKeys(myReturnDateString);
+      //  returnDateSelect pointing to SearchInput$RetDate
+        returnDateSelect(driver).click();
+        returnDateSelect(driver).clear();
+        returnDateSelect(driver).sendKeys("01/08/2015");
 
-        WebElement noOfAdults = driver.findElement(
-                By.xpath(".//*[@id='SearchInput_PaxTypeADT']//*[.=2]"));
-        noOfAdults.click();
+     //  noOfAdults pointing to 2
+        noOfAdults(driver).click();
 
 
-        WebElement searchButton = driver.findElement(
-                By.name("SearchInput$ButtonSubmit"));
-        searchButton.click();
-
+      //  searchButton pointing to submit
+        searchButton(driver).click();
 
     }
 
@@ -85,13 +75,11 @@ public class mainTest {
     public void flightSelection() throws Throwable {
         new WebDriverWait(driver, 10).until(
                 ExpectedConditions.presenceOfElementLocated(By.xpath(".//*[@id='SelectInput_ButtonSubmit']")));
-
+    //Check on Select Page
         Assert.assertTrue("Title should start with Select",
                 driver.getTitle().startsWith("Select"));
-
-        WebElement contButton = driver.findElement(
-                By.xpath(".//*[@id='SelectInput_ButtonSubmit']"));
-        contButton.click();
+        //contButton pointing to ButtonSubmit
+        contButton(driver).click();
 
     }
 
@@ -100,85 +88,76 @@ public class mainTest {
 
         new WebDriverWait(driver, 10).until(
                 ExpectedConditions.presenceOfElementLocated(By.xpath(".//*[@id='GrpServices_ButtonSubmit']")));
-
+        //Check on the Services age
         Assert.assertTrue("Title should start with Services",
                 driver.getTitle().startsWith("Services"));
 
-        WebElement firstDropDownTitleOption = driver.findElement(By.xpath("//.[@id='title_0']//*[.='Mr']"));
-        firstDropDownTitleOption.click();
+        //firstDropDownTitleOption = Title Mr
+        firstDropDownTitleOption(driver).click();
 
-        WebElement firstPassengerNameTextField = driver.findElement(By.xpath(".//*[@id='firstname_0']"));
-        firstPassengerNameTextField.click();
-        String firstPassengerName = "Shane";
-        firstPassengerNameTextField.clear();
-        firstPassengerNameTextField.sendKeys(firstPassengerName);
+      //   firstPassengerNameTextField firstname_0
+        firstPassengerNameTextField(driver).click();
+       // String firstPassengerName = "Shane";
+        firstPassengerNameTextField(driver).clear();
+        firstPassengerNameTextField(driver).sendKeys("Shane");
 
-        WebElement firstPassengerLastNameTextField = driver.findElement(By.xpath(".//*[@id='lastname_0']"));
-        firstPassengerLastNameTextField.click();
-        String firstPassengerLastName = "McDonnell";
-        firstPassengerLastNameTextField.clear();
-        firstPassengerLastNameTextField.sendKeys(firstPassengerLastName);
+      //  firstPassengerLastNameTextField = lastname_0
+        firstPassengerLastNameTextField(driver).click();
+        firstPassengerLastNameTextField(driver).clear();
+        firstPassengerLastNameTextField(driver).sendKeys("McDonnell");
 
-        WebElement secondDropDownTitleOption = driver.findElement(By.xpath("//.[@id='title_1']//*[.='Mrs']"));
-        secondDropDownTitleOption.click();
+        // secondDropDownTitleOption = Mrs
+        secondDropDownTitleOption(driver).click();
 
-        WebElement secondPassengerNameTextField = driver.findElement(By.xpath(".//*[@id='firstname_1']"));
-        secondPassengerNameTextField.click();
-        String secondPassengerName = "Mary";
-        secondPassengerNameTextField.clear();
-        secondPassengerNameTextField.sendKeys(secondPassengerName);
+        // secondPassengerNameTextField = firstname_1
+        secondPassengerNameTextField(driver).click();
+        secondPassengerNameTextField(driver).clear();
+        secondPassengerNameTextField(driver).sendKeys("Mary");
 
-        WebElement secondPassengerlastNameTextField = driver.findElement(By.xpath(".//*[@id='lastname_1']"));
-        secondPassengerlastNameTextField.click();
-        String secondPassengerLastName = "McDonnell";
-        secondPassengerlastNameTextField.clear();
-        secondPassengerlastNameTextField.sendKeys(secondPassengerLastName);
+        // secondPassengerlastNameTextField = lastname_1
+        secondPassengerlastNameTextField(driver).click();
+        secondPassengerlastNameTextField(driver).clear();
+        secondPassengerlastNameTextField(driver).sendKeys("McDonnell");
 
 
     }
 
     @When("I reserve my seats")
     public void reserveSeats() throws Throwable {
+       //Open Seat Selection
         WebElement selectSeatsButton = driver.findElement(
                 By.xpath(".//*[@id='seats']/div/button"));
         selectSeatsButton.click();
 
-
+        //Check Seat Selection is Open
         new WebDriverWait(driver, 10).until(
                 ExpectedConditions.presenceOfElementLocated(
                         By.cssSelector(".Open>a")));
 
-        WebElement seatSelect1 = driver.findElement(
-                By.xpath(".//*[@class='aircraft rightpanel ng-scope']//*[@class='Open']//*"));
-        seatSelect1.click();
-        WebElement seatSelect2 = driver.findElement(
-                By.xpath(".//*[@class='aircraft rightpanel ng-scope']//*[@class='Open']//*"));
-        seatSelect2.click();
 
+        //depart seatSelect = Open Seat
+        seatSelect(driver).click();
+        //Select next open seat
+        seatSelect(driver).click();
 
+        //Go to Second Seat Map
         WebElement secondSeatSelections = driver.findElement(
                 By.xpath(".//*[@name='GrpServices$SeatMapInputServices$Seats_1_0']"));
         secondSeatSelections.click();
 
 
-        WebElement seatSelect3 = driver.findElement(
-                By.xpath(".//*[@class='aircraft rightpanel ng-scope']//*[@class='Open']//*"));
-        seatSelect3.click();
-        WebElement seatSelect4 = driver.findElement(
-                By.xpath(".//*[@class='aircraft rightpanel ng-scope']//*[@class='Open']//*"));
-        seatSelect4.click();
-
-
+        //return seatSelect = Open Seat
+        seatSelect(driver).click();
+        //Select next open seat
+        seatSelect(driver).click();
 
     }
 
     @Then("I verify the seat were selected")
     public void verifyAndBrowserClose() throws Throwable {
 
-        WebElement seats = driver.findElement(
-                By.xpath(".//*[@id='seats']/div/div[5]/table/tbody/tr[2]/td[1]/input"));
-
-        assertTrue(seats.isDisplayed());
+         //seats = input
+        assertTrue(seats(driver) != null);
 
         //closing browser
         driver.quit();

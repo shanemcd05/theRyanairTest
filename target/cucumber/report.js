@@ -115,7 +115,7 @@ formatter.match({
   "location": "mainTest.goToRyanairSearchPage()"
 });
 formatter.result({
-  "duration": 5589509803,
+  "duration": 5293527412,
   "status": "passed"
 });
 formatter.match({
@@ -132,35 +132,35 @@ formatter.match({
   "location": "mainTest.searchForFlight(String,String)"
 });
 formatter.result({
-  "duration": 2744569142,
+  "duration": 2901533113,
   "status": "passed"
 });
 formatter.match({
   "location": "mainTest.flightSelection()"
 });
 formatter.result({
-  "duration": 2661261205,
+  "duration": 24468041338,
   "status": "passed"
 });
 formatter.match({
   "location": "mainTest.groupServicePassagerInformation()"
 });
 formatter.result({
-  "duration": 6223779995,
+  "duration": 5362872736,
   "status": "passed"
 });
 formatter.match({
   "location": "mainTest.reserveSeats()"
 });
 formatter.result({
-  "duration": 2474998017,
+  "duration": 2349509996,
   "status": "passed"
 });
 formatter.match({
   "location": "mainTest.verifyAndBrowserClose()"
 });
 formatter.result({
-  "duration": 406467058,
+  "duration": 356906678,
   "status": "passed"
 });
 });
